@@ -208,3 +208,5 @@ $RECYCLE.BIN/
 
 /test-results/*
 /test-results
+/allure-results/*
+/allure-results

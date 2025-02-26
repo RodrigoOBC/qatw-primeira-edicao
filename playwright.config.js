@@ -14,7 +14,8 @@ const config = {
   },
   fullyParallel: true,
   retries: parseInt(process.env.RETRIES),
-  reporter: [['html', { outputFolder: 'test-results' }], ['list'], ['junit', { outputFile: 'test-results/results.xml' }]],
+  // reporter: [['html', { outputFolder: 'test-results' }], ['list'], ['junit', { outputFile: 'test-results/results.xml' }]],
+  reporter: 'allure-playwright',
 
   use: {
     actionTimeout: 0,

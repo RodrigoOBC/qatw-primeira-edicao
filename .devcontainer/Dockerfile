@@ -34,7 +34,8 @@ RUN apt-get install -y \
   libatk-bridge2.0-0 \
   libepoxy0 \
   libgbm-dev \
-  libxshmfence1
+  libxshmfence1 \
+  openjdk-21-jdk
 
 
 SHELL ["/bin/bash", "-c"]
@@ -47,6 +48,8 @@ COPY package.json package-lock.json ./
 RUN npm install 
 RUN npx playwright install --with-deps
 
+ENV JAVA_HOME=/usr/lib/jvm/java-21-openjdk-amd64
+ENV PATH="${JAVA_HOME}/bin:${PATH}"
 
 EXPOSE 3001
 

@@ -7,6 +7,18 @@ pipeline {
     }
 
     stages {
+        stage('Carregar .env') {
+            steps {
+                script {
+                    def envFile = readFile('.env').trim()
+                    envFile.split("\n").each { line ->
+                        def (key, value) = line.tokenize('=')
+                        env[key] = value
+                    }
+                    echo "Variável carregada: ${env.CPF}"
+                }
+            }
+        }
         stage('Node.js Deps') {
             steps {
                 sh 'npm install'

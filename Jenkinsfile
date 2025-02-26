@@ -2,23 +2,17 @@ pipeline {
     agent {
         docker {
             image 'mcr.microsoft.com/playwright:v1.50.1-noble'
-            args '--network qatw-primeira-edicao_skynet'
+            args '--network qatw-primeira-edicao_skynet -v $WORKSPACE/.env:/app/.env'
         }
     }
 
     stages {
-        stage('Carregar .env') {
+        stage('Load Env Vars') {
             steps {
-                script {
-                    def envFile = readFile('.env').trim()
-                    envFile.split("\n").each { line ->
-                        def (key, value) = line.tokenize('=')
-                        env[key] = value
-                    }
-                    echo "Variável carregada: ${env.CPF}"
-                }
+                sh 'export $(grep -v "^#" /app/.env | xargs)'
             }
         }
+        
         stage('Node.js Deps') {
             steps {
                 sh 'npm install'
@@ -31,4 +25,3 @@ pipeline {
         }
     }
 }
-

@@ -7,11 +7,6 @@ pipeline {
     }
 
     stages {
-        stage('Load Env Vars') {
-            steps {
-                sh 'export $(grep -v "^#" /app/.env | xargs)'
-            }
-        }
         
         stage('Node.js Deps') {
             steps {
